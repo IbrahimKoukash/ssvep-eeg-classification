@@ -53,7 +53,21 @@ pip install -r requirements.txt
 jupyter notebook notebooks/bciHackathon2025Final.ipynb
 ```
 
-Developed on Python 3.9.
+Requires Python 3.9–3.11 (developed on 3.9). The version ceilings in
+`requirements.txt` are deliberate:
+
+- **tensorflow < 2.16** — 2.16 switched to Keras 3, which changes `input_shape=`
+  handling in `Sequential` and breaks the ANN cell. This is also what caps the
+  Python version: no TF 2.15 wheels exist for 3.12+. On Apple Silicon, install
+  `tensorflow-macos` instead.
+- **numpy < 2.0** — TensorFlow below 2.16 is built against the numpy 1.x ABI.
+- **scikit-learn < 1.7** — `LogisticRegression(multi_class='multinomial')` is
+  deprecated from 1.5 and removed in 1.7.
+- **mne** — needed only for `from mne.decoding import CSP` in the import cell.
+  CSP is never called; delete that import and you can drop the dependency.
+
+The plotting cells request Times New Roman. Without it installed, matplotlib
+falls back to DejaVu Sans and prints a warning — cosmetic only.
 
 ## Before you run
 
@@ -80,8 +94,13 @@ Repeat for every subject/session, then export once.
 ├── data/ # recordings (git-ignored)
 ├── results/ # feature CSVs, figures (git-ignored)
 ├── requirements.txt
+├── LICENSE
 └── README.md
 ```
+## License
+
+Released under the MIT License — see [`LICENSE`](LICENSE). The license covers the
+code in this repository only; the SSVEP recordings carry their own terms.
 
 ## Notes
 
