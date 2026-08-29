@@ -76,10 +76,9 @@ Repeat for every subject/session, then export once.
 ## Repository layout
 
 ```
-├── notebooks/
-│   └── bciHackathon2025Final.ipynb   # full pipeline
-├── data/                             # recordings (git-ignored)
-├── results/                          # feature CSVs, figures (git-ignored)
+├── bciHackathon2025Final.ipynb # full pipeline
+├── data/ # recordings (git-ignored)
+├── results/ # feature CSVs, figures (git-ignored)
 ├── requirements.txt
 └── README.md
 ```
